@@ -11,8 +11,6 @@ CMake is used to build this library, which is exported as a library target calle
 #include "waypoints/waypoints.h"
 ```
 
-Note that you'll need CMake version 3.13 or above; it is recommended to build and install CMake from source, directions are located in the [CMake GitLab repository](https://github.com/Kitware/CMake).
-
 The library can be also be compiled stand-alone using the CMake idiom of creating a *build* directory and then, from within that directory issuing:
 
 ```
@@ -20,23 +18,26 @@ cmake ..
 make
 ```
 
-This will build the library and an example executable called *waypoints_example*. The example executable source file is located at *examples/waypoints_example.cc*. This code is built and tested on AMD64 and AARCH64 systems running Linux and on AMD64 systems running the Windows Subsystem for Linux (WSL).
+This will build the library and an example executable called *waypoints_example*. The example executable source file is located at *examples/waypoints_example.cc*. 
+
+# Namespace
+This library is within the namespace *bfs*.
 
 ## Waypoint
-This class defines a single waypoint using Latitude, Longitude, Altitude (LLA) coordinates.
+This class defines a single waypoint using Latitude, Longitude, Altitude (LLA).
 
 ### Methods
 
 **Waypoint()** Constructs an empty *Waypoint* object.
 
 ```C++
-Waypoint point;
+bfs::Waypoint point;
 ```
 
 **Waypoint(double lat_rad, double lon_rad, float alt_m)** Constructs a *Waypoint* object, setting the latitude (rad), longitude (rad), and altitude (m).
 
 ```C++
-Waypoint point(global::conversions::Deg_to_Rad(44.9739904036), global::conversions::Deg_to_Rad(-93.2277273172), 100.0);
+bfs::Waypoint point(0.78494, -1.6271, 100.0);
 ```
 
 **double lat_rad()** Returns the waypoint's latitude, rad.
@@ -60,13 +61,13 @@ std::cout << point.alt_m() << std::endl;
 **void lat_rad(double val)** Sets the waypoint's latitude, rad.
 
 ```C++
-point.lat_rad(global::conversions::Deg_to_Rad(44.9739904036));
+point.lat_rad(0.78494);
 ```
 
 **void lon_rad(double val)** Sets the waypoint's longitude, rad.
 
 ```C++
-point.lon_rad(global::conversions::Deg_to_Rad(-93.2277273172));
+point.lon_rad(-1.6271);
 ```
 
 **void alt_m(float val)** Sets the Waypoint's altitude, m.
@@ -87,13 +88,13 @@ This class defines a container for waypoints. The container capacity is template
 **Waypoints<std::size_t N>** Constructs a *Waypoints* object. The capacity of the container is provided as a template parameter.
 
 ```C++
-Waypoints<10> active_waypoints;
+bfs::Waypoints<10> active_waypoints;
 ```
 
 **bool Add(const Waypoint &ref)** Adds a waypoint into the container. Returns true on success or false on failure. Failure would indicate that the contianer is full.
 
 ```C++
-Waypoint point(global::conversions::Deg_to_Rad(44.9739904036), global::conversions::Deg_to_Rad(-93.2277273172), 100.0);
+bfs::Waypoint point(0.78494, -1.6271, 100.0);
 active_waypoints.Add(point);
 ```
 
