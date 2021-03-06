@@ -6,4 +6,4 @@ Lint:
   tags:
     - bfs
   script: 
-    - cpplint.py --verbose=0 --filter=-whitespace,-line_length include/waypoints/waypoints.h  
+    - cpplint --verbose=0 include/waypoints/waypoints.h  
